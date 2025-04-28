@@ -10,12 +10,14 @@ koef = [1, 1, 1]
 num_classes = 10
 
 model = rt.create(
-    block = rt.ResNetBlock, 
+    block = rt.ResBlockV1, 
     strides = strides, 
     num_blocks = num_blocks, 
     channels = channels, 
     koef=koef, 
-    num_classes=100
+    num_classes=100,
+    act1=torch.nn.ReLU(inplace=True),
+    act2=torch.nn.LeakyReLU(inplace=True, negative_slope=0.01),
 ).to(device)
 
 print(model)
